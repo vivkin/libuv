@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.0.0)
-project(libuv VERSION 1.0.0)
+cmake_minimum_required(VERSION 2.8.12)
+project(libuv)
 
 set(UV_SOURCES
     include/uv.h
@@ -108,7 +108,7 @@ if(UNIX)
             src/unix/pthread-fixes.c
             src/unix/android-ifaddrs.c
             )
-        set(UV_DEFINITIONS ${UV_DEFINITIONS} _POSIX_C_SOURCE=200112)
+        set(UV_DEFINITIONS ${UV_DEFINITIONS} _GNU_SOURCE)
         set(UV_LIBRARIES ${UV_LIBRARIES} dl)
     else()
         set(UV_SOURCES ${UV_SOURCES}
@@ -117,7 +117,7 @@ if(UNIX)
             src/unix/linux-syscalls.c
             src/unix/linux-syscalls.h
             )
-        set(UV_DEFINITIONS ${UV_DEFINITIONS} _POSIX_C_SOURCE=200112)
+        set(UV_DEFINITIONS ${UV_DEFINITIONS} _GNU_SOURCE)
         set(UV_LIBRARIES ${UV_LIBRARIES} pthread dl rt)
     endif()
 endif()
